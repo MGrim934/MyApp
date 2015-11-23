@@ -1,0 +1,34 @@
+[
+{"mood" : "Happy",
+"image": "/Images/happy.png"},
+
+{"mood" : "Angry",
+"image": "/Images/anger.png"},
+
+{"mood" : "Tearful",
+"image": "/Images/crying.png"},
+
+{"mood" : "Happy",
+"image": "/Images/happy.png"},
+
+{"mood" : "Neutral",
+"image": "/Images/neutral.png"},
+
+{"mood" : "Sad",
+"image": "/Images/sad.png"},
+
+{"mood" : "sleepy",
+"image": "/Images/sleepy.png"},
+
+{"mood" : "surprise",
+"image": "/Images/surprise.png"},
+
+{"mood" : "veryHappy",
+"image": "/Images/veryHappy.png"},
+
+
+{"mood" : "worry",
+"image": "/Images/worry.png"}
+
+
+]

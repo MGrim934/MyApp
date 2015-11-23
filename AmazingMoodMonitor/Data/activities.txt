@@ -1,0 +1,28 @@
+[
+{"activity" : "Exercise",
+"image": "/Images/iExercise.png"},
+
+{"activity" : "Food",
+"image": "/Images/iFood.png"},
+
+{"activity" : "Study",
+"image": "/Images/iRead.png"},
+
+{"activity" : "Showering",
+"image": "/Images/iShower.png"},
+
+{"activity" : "Sleeping",
+"image": "/Images/iSleep.png"},
+
+{"activity" : "Socialising",
+"image": "/Images/iSocial.png"},
+
+{"activity" : "Recreation",
+"image": "/Images/iRecreation.png"},
+
+{"activity" : "Working",
+"image": "/Images/iWork.png"}
+
+
+
+]
