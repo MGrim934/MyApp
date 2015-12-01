@@ -35,6 +35,7 @@ namespace AmazingMoodMonitor
         Random roll = new Random();
         ArrayList moodDupCheck = new ArrayList();
         ArrayList actDupCheck = new ArrayList();
+        Boolean bookOpen = false;
 
         string mood, activity;
 
@@ -311,12 +312,65 @@ namespace AmazingMoodMonitor
             //add to list
             _previousEntries.Add(entry);
             updateJournal();
-            ptMain.SelectedIndex = 1;
+            ptMain.SelectedIndex = 2; ;
            
 
 
         }
 
+        private void tbNewEntry_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            //change selected index
+            ptMain.SelectedIndex = 1;
+            //opens up journal
+            changeBackground();
+           
+            
+
+
+        }
+
+        private void tbPrevious_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ptMain.SelectedIndex = 2;
+
+
+            changeBackground();
+           
+        }
+
+        private void changeBackground()
+        {
+            Uri pic = new Uri("ms-appx:///Images/bg.jpg",UriKind.RelativeOrAbsolute);
+            ImageBrush fill = new ImageBrush();
+            fill.ImageSource = new BitmapImage(pic);
+
+            
+
+            gdMaster.Background = fill;
+            bookOpen = true;
+        }
+
+        private void closeBook(object sender, TappedRoutedEventArgs e)
+        {
+            Pivot curr = (Pivot)sender;
+
+            if (curr.SelectedIndex == 0) { 
+            Uri pic = new Uri("ms-appx:///Images/main.png", UriKind.RelativeOrAbsolute);
+            ImageBrush fill = new ImageBrush();
+            fill.ImageSource = new BitmapImage(pic);
+                bookOpen = false;
+                
+
+            gdMaster.Background = fill;
+            }
+            else if(bookOpen!=true)
+            {
+                changeBackground();
+                
+            }
+        
+        }
 
         private void updateJournal()
         {
@@ -324,6 +378,13 @@ namespace AmazingMoodMonitor
             lvJournal.ItemsSource = _previousEntries;
             lvJournal.ItemsSource = null;
             lvJournal.ItemsSource = _previousEntries;
+
+            //open file or create file if there is none
+            //check  mood
+            //if there then give it the location of the image
+            //activity check give image
+            //read in date and time
+            //update previous entries
 
 
 

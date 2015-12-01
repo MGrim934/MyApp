@@ -23,12 +23,31 @@
            
     </Page.Resources>
 
-    <Grid >
+    <Grid x:Name="gdMaster" >
         <Grid.Background>
-            <ImageBrush ImageSource="Images/bg.jpg" 
+            <ImageBrush ImageSource="Images/main.png" 
                         Stretch="UniformToFill" Opacity="0.7" />
         </Grid.Background>
-        <Pivot x:Name="ptMain">
+        <Pivot x:Name="ptMain" Tapped="closeBook" >
+            <PivotItem Header="Welcome" >
+                <StackPanel x:Name="spStart" Orientation="Vertical">
+                    <TextBlock x:Name="tbStart" Text="  The Amazing Mood Monitor!" FontSize="40" Foreground="AntiqueWhite"  TextWrapping="WrapWholeWords" HorizontalAlignment="Center" Margin="0,0,0,60"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Background="AntiqueWhite" Width="280" Height="100" Grid.Row="0">
+                            <TextBlock x:Name="tbNewEntry" Width="280" TextAlignment="Center" Margin ="0,25,0,0" Text="Dear Diary..." Foreground="RosyBrown" FontSize="30" Tapped="tbNewEntry_Tapped" />
+                        </Border>
+                        <Border Background="AntiqueWhite" Width="280" Height="100" Grid.Row="1" Margin="0,20,0,0">
+                            <TextBlock x:Name="tbPrevious" Width="280" TextAlignment="Center" Margin ="0,25,0,0" Text="Previous Entries" Foreground="RosyBrown" FontSize="30" Tapped="tbPrevious_Tapped"/>
+                        </Border>
+
+                    </Grid>
+                </StackPanel>
+                
+            </PivotItem>
             <PivotItem Header="Right Now">
             <StackPanel x:Name="spMood" Orientation="Vertical" HorizontalAlignment="Center">
                 <TextBlock x:Name="tbMood" Text="How do you Feel?" Style="{StaticResource HeaderTextBlockStyle}" Margin="0,0,0,60"/>

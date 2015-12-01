@@ -133,6 +133,7 @@
     <Content Include="Images\iSleep.png" />
     <Content Include="Images\iSocial.png" />
     <Content Include="Images\iWork.png" />
+    <Content Include="Images\main.png" />
     <Content Include="Images\neutral.png" />
     <Content Include="Images\sad.png" />
     <Content Include="Images\sleepy.png" />
