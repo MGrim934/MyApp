@@ -90,6 +90,13 @@
                 </ListView>
                 
             </PivotItem>
+            <PivotItem  Header="Test" >
+
+                <TextBlock x:Name="tbTest" Text="Test">
+                    
+                </TextBlock>
+
+            </PivotItem>
         </Pivot>
 
 

@@ -110,6 +110,7 @@ namespace AmazingMoodMonitor
 
             generateMoodGrid();
             generateActivityGrid();
+            ReadJournalFile();
 
 
         }//load data
@@ -299,7 +300,7 @@ namespace AmazingMoodMonitor
         private void createJournalEntry()
         {
             JournalEntry entry = new JournalEntry();
-            int index = _moodList.FindIndex(item => item.name.Equals(mood));
+            int index = _moodList.FindIndex(item => item.name.Equals(mood)); 
            
             entry.mood =_moodList[index].image;
 
@@ -310,7 +311,12 @@ namespace AmazingMoodMonitor
           
             entry.dateTime = DateTime.Now;
             //add to list
-            _previousEntries.Add(entry);
+            _previousEntries.Insert(0,entry); //adds it to the top
+
+
+            JournalEntry(entry);//adds journal to entry file for storage
+
+
             updateJournal();
             ptMain.SelectedIndex = 2; ;
            
@@ -378,6 +384,7 @@ namespace AmazingMoodMonitor
             lvJournal.ItemsSource = _previousEntries;
             lvJournal.ItemsSource = null;
             lvJournal.ItemsSource = _previousEntries;
+            
 
             //open file or create file if there is none
             //check  mood
@@ -385,15 +392,106 @@ namespace AmazingMoodMonitor
             //activity check give image
             //read in date and time
             //update previous entries
+        }
+
+        async void ReadJournalFile()
+        {
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            StorageFile journalFile;
+
+            try
+            {
+                journalFile = await storageFolder.GetFileAsync("journal.txt");
+            }
+            catch (Exception myE)
+            {
+                string message = myE.Message;
+                return;
+            }
+
+            string fileText=await Windows.Storage.FileIO.ReadTextAsync(journalFile);
+
+            //run method that parses this string and adds elements to the array from it
+            tbTest.Text = fileText;
+            AddToJournal(fileText);
+
+        }
+
+         void AddToJournal(String text)
+        {
+            string[] words = text.Split(',','\n');
+
+            for(int i = 0; i < words.Length; i+=3)
+            {
+                //create a new entry
+                if ((i + 3) < words.Length)
+                {
+                    JournalEntry entry = new JournalEntry();
+                    entry.mood = words[i];
+                    entry.activity = words[i + 1];
 
 
-
-
-
-
-
+                    string date = words[i + 2];
+                    entry.dateTime = Convert.ToDateTime(date);
+                    _previousEntries.Add(entry);
+                }
+                
+            }
+            _previousEntries.Reverse();
 
 
         }
+
+        //write to journal
+        async void JournalEntry(JournalEntry entry)
+        {
+
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            // create the file and append
+            StorageFile journalFile;
+            string fileText = ",";
+            try
+            {
+                journalFile = await storageFolder.GetFileAsync("journal.txt");
+                fileText = await Windows.Storage.FileIO.ReadTextAsync(journalFile);
+
+            }
+            catch (Exception myE)
+            {
+                string message = myE.Message;
+                journalFile = await storageFolder.CreateFileAsync("journal.txt");
+            }
+            string jLine;
+            jLine = entry.mood + "," + entry.activity + "," + entry.dateTime;
+            await Windows.Storage.FileIO.WriteTextAsync(journalFile, fileText + jLine + System.Environment.NewLine);
+            //test
+            tbTest.Text= tbTest.Text + jLine + System.Environment.NewLine;
+
+        }
+
+        //clear journal
+        async void clearJournal()
+        {
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            // create the file and append
+            StorageFile journalFile;
+            string fileText = ",";
+            try
+            {
+                journalFile = await storageFolder.GetFileAsync("journal.txt");
+                fileText = await Windows.Storage.FileIO.ReadTextAsync(journalFile);
+
+            }
+            catch (Exception myE)
+            {
+                string message = myE.Message;
+                journalFile = await storageFolder.CreateFileAsync("journal.txt");
+            }
+            await Windows.Storage.FileIO.WriteTextAsync(journalFile,"");
+
+        }
+
+
+
     }
 }
