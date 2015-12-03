@@ -381,7 +381,6 @@ namespace AmazingMoodMonitor
         private void updateJournal()
         {
   
-            lvJournal.ItemsSource = _previousEntries;
             lvJournal.ItemsSource = null;
             lvJournal.ItemsSource = _previousEntries;
             
@@ -469,13 +468,67 @@ namespace AmazingMoodMonitor
 
         }
 
+        //if the user clicks to clear the journal
+        private void btnClearQ_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            btnClearQ.Content = "Are you Sure ?"; //gotta make sure
+            btnClearQ.Tapped -= btnClearQ_Tapped; //stop them from double tapping
+            //make other buttons visible
+            btnClearY.Visibility = Visibility.Visible;
+            btnClearN.Visibility = Visibility.Visible;
+        }
+
+        private void btnClearYN_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Button current = (Button)sender;
+            //check index
+            char index = current.Name[8];
+
+            switch (index)
+            {
+                case 'Y':
+                    clearJournal();
+                    clearJournalArray();
+                  
+                    break;
+                case 'N':
+                    //don't clear the journal!
+                    break;
+             
+            }
+            resetButtons();
+
+
+
+
+        }
+        void resetButtons()
+        {
+            btnClearQ.Content = "Clear Previous Entries";
+            btnClearQ.Tapped += btnClearQ_Tapped;
+
+            btnClearY.Visibility = Visibility.Collapsed;
+            btnClearN.Visibility = Visibility.Collapsed;
+        }
+
+        private void clearJournalArray()
+        {
+            _previousEntries.Clear();
+            updateJournal();
+            
+        }
+
+
+
+
+
         //clear journal
         async void clearJournal()
         {
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
             // create the file and append
             StorageFile journalFile;
-            string fileText = ",";
+            string fileText = "";
             try
             {
                 journalFile = await storageFolder.GetFileAsync("journal.txt");

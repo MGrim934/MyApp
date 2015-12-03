@@ -15,7 +15,7 @@
           
                <Image Source="{Binding Path=mood}" Width="75" Height="75"/>
                 <Image Source="{Binding Path=activity}" Width="100" Height="75"/>
-                <TextBlock Text="{Binding Path=dateTime}" Style="{StaticResource BodyTextBlockStyle}" />
+                <TextBlock Margin="30,0,0,0" TextAlignment="Right"  Text="{Binding Path=dateTime}" Style="{StaticResource BodyTextBlockStyle}" />
             </StackPanel>
         </DataTemplate>
 
@@ -23,10 +23,11 @@
            
     </Page.Resources>
 
-    <Grid x:Name="gdMaster" >
+        <Grid x:Name="gdMaster" >
         <Grid.Background>
+            
             <ImageBrush ImageSource="Images/main.png" 
-                        Stretch="UniformToFill" Opacity="0.7" />
+                        Stretch="Fill" Opacity="1"  />
         </Grid.Background>
         <Pivot x:Name="ptMain" Tapped="closeBook" >
             <PivotItem Header="Welcome" >
@@ -37,10 +38,10 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Border Background="AntiqueWhite" Width="280" Height="100" Grid.Row="0">
+                        <Border Background="AntiqueWhite" CornerRadius="20" Width="280" Height="100" Grid.Row="0">
                             <TextBlock x:Name="tbNewEntry" Width="280" TextAlignment="Center" Margin ="0,25,0,0" Text="Dear Diary..." Foreground="RosyBrown" FontSize="30" Tapped="tbNewEntry_Tapped" />
                         </Border>
-                        <Border Background="AntiqueWhite" Width="280" Height="100" Grid.Row="1" Margin="0,20,0,0">
+                        <Border Background="AntiqueWhite" CornerRadius="20" Width="280" Height="100" Grid.Row="1" Margin="0,20,0,0">
                             <TextBlock x:Name="tbPrevious" Width="280" TextAlignment="Center" Margin ="0,25,0,0" Text="Previous Entries" Foreground="RosyBrown" FontSize="30" Tapped="tbPrevious_Tapped"/>
                         </Border>
 
@@ -84,11 +85,21 @@
 
             </PivotItem>
             <PivotItem x:Name="piPrevious" Header="Previous Entries" >
-
-                <ListView x:Name="lvJournal" BorderBrush="Red" BorderThickness="3" ItemTemplate="{StaticResource journalEntryTemplate}" >
+                <StackPanel x:Name="spPrevious" Orientation="Vertical">
+                <ListView Height="450"  x:Name="lvJournal"  ItemTemplate="{StaticResource journalEntryTemplate}" >
                     
                 </ListView>
-                
+                    
+                    <Button x:Name="btnClearQ" Content="Clear Previous Entries" HorizontalAlignment="Center" Tapped="btnClearQ_Tapped"/>
+                    <StackPanel x:Name="spClearButtons" Orientation="Horizontal" HorizontalAlignment="Center">
+                       
+                        <Button x:Name="btnClearY" Content="Yes" HorizontalAlignment="Center" Visibility="Collapsed" Tapped="btnClearYN_Tapped"/>
+                        <Button x:Name="btnClearN" Content="No" HorizontalAlignment="Center" Visibility="Collapsed" Tapped="btnClearYN_Tapped" />
+                        
+
+                    </StackPanel>
+                </StackPanel>
+
             </PivotItem>
             <PivotItem  Header="Test" >
 
@@ -101,4 +112,5 @@
 
 
     </Grid>
+
 </Page>
