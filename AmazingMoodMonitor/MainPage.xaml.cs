@@ -35,6 +35,7 @@ namespace AmazingMoodMonitor
         Random roll = new Random();
         ArrayList moodDupCheck = new ArrayList();
         ArrayList actDupCheck = new ArrayList();
+        ArrayList _moreLikeThisList = new ArrayList();
         Boolean bookOpen = false;
 
         string mood, activity;
@@ -517,6 +518,171 @@ namespace AmazingMoodMonitor
             updateJournal();
             
         }
+
+        private void lvJournal_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            //get item at selected index
+           PivotlimitCheck();
+
+
+
+
+            ListView current = (ListView) sender;
+            //find current entry
+            if (_previousEntries.Count<1)
+            {
+                return; //breaks out of this method if there are no entries
+            }
+            JournalEntry entry =(JournalEntry) _previousEntries[lvJournal.SelectedIndex];
+            PivotItem piNew = new PivotItem();
+            piNew.Name = "piStat";
+            piNew.Header ="Statistics";
+            StackPanel stk = new StackPanel();
+            TextBlock block = new TextBlock();
+            TextBlock header = new TextBlock();
+            stk.Orientation = Orientation.Horizontal;
+            
+            //add images and text
+            Image mood = new Image();
+
+            mood.Width =75;
+            mood.Height =75;
+            
+            mood.Source = new BitmapImage (new Uri("ms-appx://"+entry.mood, UriKind.RelativeOrAbsolute));
+            mood.Name = entry.mood;
+            mood.Tapped += more_Tapped;
+            Image activity = new Image();
+            activity.Width =100;
+            activity.Height = 75;
+            activity.Name = entry.activity;
+            activity.Source = new BitmapImage(new Uri("ms-appx://" + entry.activity, UriKind.RelativeOrAbsolute));
+
+            TextBlock date = new TextBlock();
+            date.TextAlignment = TextAlignment.Center;
+            date.Text = entry.dateTime.ToString();
+            date.Margin = new Thickness(20, 0, 0, 0);
+            stk.Children.Add(mood);
+            stk.Children.Add(activity);
+            stk.Children.Add(date);
+
+            header.Text = "More Like This?";
+            header.Style = (Style) Resources["HeaderTextBlockStyle"];
+            header.Margin = new Thickness(0, 0, 0, 40);
+            header.TextAlignment = TextAlignment.Center;
+
+            TextBlock question = new TextBlock();
+            question.Text = "?";
+           question.Style = (Style)Resources["HeaderTextBlockStyle"];
+            question.FontSize = 150;
+            question.Margin = new Thickness(0, 20, 0, 0);
+            question.TextAlignment = TextAlignment.Center;
+
+            StackPanel stack = new StackPanel();
+            stack.Children.Add(header);
+
+            stack.HorizontalAlignment=HorizontalAlignment.Center;
+            stack.Children.Add(stk);
+            stack.Children.Add(question);
+            
+           
+        
+         
+      
+         
+           
+            piNew.Content = stack;
+ 
+            ptMain.Items.Add(piNew);
+            ptMain.SelectedIndex=4;
+          
+
+            //offer user choice
+            //more like this
+            //mood
+            //activity
+
+
+        }
+
+        private void PivotlimitCheck()
+        {
+
+            if (ptMain.Items.Count > 4)
+                ptMain.Items.RemoveAt(4);
+
+        }
+
+        private void updateList(ListView lvMoreLikeThis)
+        {
+            lvMoreLikeThis.ItemsSource = null;
+            lvMoreLikeThis.ItemsSource = _moreLikeThisList;
+        }
+
+        private void more_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PivotlimitCheck(); //removes stats page if theres already one there
+            //stops the user from generating many pages
+          
+            Image img = (Image)sender; //cast the sender
+            fillList(img); //files the list with the mood associated with the image
+            //remove old pivot page
+            //create new pivot page
+            PivotItem piNew = new PivotItem(); //creates a new pivot item
+            piNew.Name = "piStat";
+            piNew.Header = "Statistics"; //header
+            StackPanel stk = new StackPanel();
+            stk.Orientation = Orientation.Horizontal;
+
+            StackPanel stack = new StackPanel();
+            TextBlock sim = new TextBlock();
+            sim.Text = "Similar Entries";
+            sim.Style = (Style)Resources["HeaderTextBlockStyle"];
+            sim.Margin = new Thickness(0, 0, 0, 40);
+            sim.TextAlignment = TextAlignment.Center;
+
+            stack.HorizontalAlignment = HorizontalAlignment.Center;
+            stack.Orientation = Orientation.Vertical;
+          
+
+
+            ListView lvMoreLikeThis = new ListView(); //creates a new list view
+            lvMoreLikeThis.ItemsSource = _moreLikeThisList; //sets the source
+            updateList(lvMoreLikeThis);
+            lvMoreLikeThis.Name = "lvMoreLikeThis";
+            lvMoreLikeThis.ItemTemplate = journalEntryTemp; //sets the item template that the other list view uses
+            stack.Children.Add(sim);
+            stack.Children.Add(lvMoreLikeThis); //adds it to the stackpanel
+            piNew.Content = stack; //sets this pivot items content as the stackpanel
+            ptMain.Items.Add(piNew);//adds a new stack panel
+            ptMain.SelectedIndex=4; //moves to the new page that was generated
+
+
+
+
+        }
+
+
+        private void fillList(Image img)
+        {
+            
+         
+            //check against _previous entries
+            //fill new arraylist
+            //create listview
+            //send to list view
+            JournalEntry entry; //creates a new journal entry for the list
+            _moreLikeThisList.Clear();
+            for (int i = 0; i < _previousEntries.Count; i++) //checks every element of the array
+            {
+                entry = (JournalEntry)_previousEntries[i];
+                if (entry.mood.Equals(img.Name)) //if we've seen another instance of this mood, add it to the list. Since we are looking for entries similar to this one
+                {
+                    _moreLikeThisList.Add(entry); //adds it to the list
+                }
+            }
+         
+        }
+
 
 
 

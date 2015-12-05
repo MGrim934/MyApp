@@ -9,7 +9,7 @@
 
 
     <Page.Resources>
-        <DataTemplate x:Key="journalEntryTemplate">
+        <DataTemplate x:Name="journalEntryTemp" x:Key="journalEntryTemplate">
             
             <StackPanel Orientation="Horizontal" >
           
@@ -86,7 +86,7 @@
             </PivotItem>
             <PivotItem x:Name="piPrevious" Header="Previous Entries" >
                 <StackPanel x:Name="spPrevious" Orientation="Vertical">
-                <ListView Height="450"  x:Name="lvJournal"  ItemTemplate="{StaticResource journalEntryTemplate}" >
+                <ListView Height="450"  x:Name="lvJournal"  ItemTemplate="{StaticResource journalEntryTemplate}" Tapped="lvJournal_Tapped" >
                     
                 </ListView>
                     
