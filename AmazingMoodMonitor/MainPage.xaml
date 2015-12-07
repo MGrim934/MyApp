@@ -26,32 +26,35 @@
         <Grid x:Name="gdMaster" >
         <Grid.Background>
             
-            <ImageBrush ImageSource="Images/main.png" 
+            <ImageBrush ImageSource="Images/main1.png" 
                         Stretch="Fill" Opacity="1"  />
         </Grid.Background>
         <Pivot x:Name="ptMain" Tapped="closeBook" >
-            <PivotItem Header="Welcome" >
+            <PivotItem  x:Uid="uidPiWelcome" Header="Hi" >
                 <StackPanel x:Name="spStart" Orientation="Vertical">
-                    <TextBlock x:Name="tbStart" Text="  The Amazing Mood Monitor!" FontSize="40" Foreground="AntiqueWhite"  TextWrapping="WrapWholeWords" HorizontalAlignment="Center" Margin="0,0,0,60"/>
+                    <TextBlock TextAlignment="Center"  x:Name="tbStart" Text="My Mood Monitor" FontSize="40" Foreground="AntiqueWhite"  TextWrapping="WrapWholeWords" HorizontalAlignment="Center" Margin="0,0,0,60"/>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Border Background="AntiqueWhite" CornerRadius="20" Width="280" Height="100" Grid.Row="0">
-                            <TextBlock x:Name="tbNewEntry" Width="280" TextAlignment="Center" Margin ="0,25,0,0" Text="Dear Diary..." Foreground="RosyBrown" FontSize="30" Tapped="tbNewEntry_Tapped" />
+                            <TextBlock x:Uid="uidNewEntry" x:Name="tbNewEntry" Width="280" TextAlignment="Center" Margin ="0,25,0,0" Text="Dear Diary..."  FontSize="30" Tapped="tbNewEntry_Tapped" Style="{StaticResource HeaderTextBlockStyle}" />
                         </Border>
                         <Border Background="AntiqueWhite" CornerRadius="20" Width="280" Height="100" Grid.Row="1" Margin="0,20,0,0">
-                            <TextBlock x:Name="tbPrevious" Width="280" TextAlignment="Center" Margin ="0,25,0,0" Text="Previous Entries" Foreground="RosyBrown" FontSize="30" Tapped="tbPrevious_Tapped"/>
+                            <TextBlock  x:Uid="uidPreviousEntry" x:Name="tbPrevious" Width="280" TextAlignment="Center" Margin ="0,25,0,0" Text="Previous Entries"  FontSize="30" Tapped="tbPrevious_Tapped" Style="{StaticResource HeaderTextBlockStyle}"/>
                         </Border>
+                       
 
                     </Grid>
+                    <Image Source="Images/splashb.png" Height="100" Width="100" Margin="0,10,0,0"/>
+                    
                 </StackPanel>
                 
             </PivotItem>
-            <PivotItem Header="Right Now">
+            <PivotItem x:Uid="uidPiNow" Header="RNow">
             <StackPanel x:Name="spMood" Orientation="Vertical" HorizontalAlignment="Center">
-                <TextBlock x:Name="tbMood" Text="How do you Feel?" Style="{StaticResource HeaderTextBlockStyle}" Margin="0,0,0,60"/>
+                <TextBlock x:Uid="uidEntryPage" x:Name="tbMood" Text="How do you Feel?" Style="{StaticResource HeaderTextBlockStyle}" Margin="0,0,0,60"/>
                 <Grid x:Name="gdMood">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -84,30 +87,24 @@
             </StackPanel>
 
             </PivotItem>
-            <PivotItem x:Name="piPrevious" Header="Previous Entries" >
+            <PivotItem x:Name="piPrevious" x:Uid="uidPiPrevious" Header="Prev" >
                 <StackPanel x:Name="spPrevious" Orientation="Vertical">
                 <ListView Height="450"  x:Name="lvJournal"  ItemTemplate="{StaticResource journalEntryTemplate}" Tapped="lvJournal_Tapped" >
                     
                 </ListView>
                     
-                    <Button x:Name="btnClearQ" Content="Clear Previous Entries" HorizontalAlignment="Center" Tapped="btnClearQ_Tapped"/>
+                    <Button x:Name="btnClearQ" x:Uid="uidBtClearQ" Content="Clear Previous Entries" HorizontalAlignment="Center" Tapped="btnClearQ_Tapped"/>
                     <StackPanel x:Name="spClearButtons" Orientation="Horizontal" HorizontalAlignment="Center">
-                       
-                        <Button x:Name="btnClearY" Content="Yes" HorizontalAlignment="Center" Visibility="Collapsed" Tapped="btnClearYN_Tapped"/>
-                        <Button x:Name="btnClearN" Content="No" HorizontalAlignment="Center" Visibility="Collapsed" Tapped="btnClearYN_Tapped" />
+
+                        <Button x:Name="btnClearY" x:Uid="uidBtClearY" Content="Yes" HorizontalAlignment="Center" Visibility="Collapsed" Tapped="btnClearYN_Tapped"/>
+                        <Button x:Name="btnClearN" x:Uid="uidBtClearN" Content="No" HorizontalAlignment="Center" Visibility="Collapsed" Tapped="btnClearYN_Tapped" />
                         
 
                     </StackPanel>
                 </StackPanel>
 
             </PivotItem>
-            <PivotItem  Header="Test" >
 
-                <TextBlock x:Name="tbTest" Text="Test">
-                    
-                </TextBlock>
-
-            </PivotItem>
         </Pivot>
 
 
