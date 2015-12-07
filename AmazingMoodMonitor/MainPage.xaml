@@ -93,11 +93,11 @@
                     
                 </ListView>
                     
-                    <Button x:Name="btnClearQ" x:Uid="uidBtClearQ" Content="Clear Previous Entries" HorizontalAlignment="Center" Tapped="btnClearQ_Tapped"/>
+                    <Button x:Name="btnClearQ" x:Uid="uidBtClearQ" Content="Clear Previous Entries" HorizontalAlignment="Center" Tapped="btnClearQ_Tapped" Margin="0,0,0,20"/>
                     <StackPanel x:Name="spClearButtons" Orientation="Horizontal" HorizontalAlignment="Center">
 
-                        <Button x:Name="btnClearY" x:Uid="uidBtClearY" Content="Yes" HorizontalAlignment="Center" Visibility="Collapsed" Tapped="btnClearYN_Tapped"/>
-                        <Button x:Name="btnClearN" x:Uid="uidBtClearN" Content="No" HorizontalAlignment="Center" Visibility="Collapsed" Tapped="btnClearYN_Tapped" />
+                        <Button x:Name="btnClearY" x:Uid="uidBtClearY" Content="Yes" HorizontalAlignment="Center" Visibility="Collapsed" Tapped="btnClearYN_Tapped" />
+                        <Button x:Name="btnClearN" x:Uid="uidBtClearN" Content="No" HorizontalAlignment="Center" Visibility="Collapsed" Tapped="btnClearYN_Tapped"/>
                         
 
                     </StackPanel>
