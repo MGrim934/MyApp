@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="5275MGrimes.MyMoodMonitor" Publisher="CN=1264952B-6A5D-4DD5-9CC9-CFF335870194" Version="1.1.4.0" />
+  <Identity Name="5275MGrimes.MyMoodMonitor" Publisher="CN=1264952B-6A5D-4DD5-9CC9-CFF335870194" Version="1.1.8.0" />
   <mp:PhoneIdentity PhoneProductId="d79bf0f0-485b-469c-8be3-0c444e19a68a" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>My Mood Monitor</DisplayName>
@@ -16,7 +16,10 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="AmazingMoodMonitor.App">
       <uap:VisualElements DisplayName="My Mood Monitor" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Want to keep a journal or monitor your mood, but can't find the time to sit down and make detailed entries?This app might be for you! It simply asks How you're feeling and what activity you are currently doing or thinking about. This allows you to keep track of your moods and actions with a number of brief but telling entries." BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="My Mood Monitor" Square71x71Logo="Assets\Square71x71Logo.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
         <uap:InitialRotationPreference>
