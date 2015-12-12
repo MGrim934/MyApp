@@ -1,6 +1,7 @@
-# MyApp
-This app is called "My Mood Monitor"
-It is a second year C# programming project.
+# MyMoodMonitorApp
+This app is called "My Mood Monitor".
+
+It is a second year C# programming project by Mark Grimes.
 
 The goal of the app is to let a user store various "journal entries" of their mood and activities they are participating in,
 or thinking about.
