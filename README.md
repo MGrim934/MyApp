@@ -6,3 +6,7 @@ The goal of the app is to let a user store various "journal entries" of their mo
 or thinking about.
 The app lets you sort your previous entries by selecting a specific entry
 and then choosing whether to find more with a similar emotion or with a similar activity.
+
+Find it here on the windows store: https://www.microsoft.com/store/apps/9NBLGGH6JZKZ
+
+
